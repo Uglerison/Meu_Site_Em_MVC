@@ -15,16 +15,19 @@
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
         <input type="text" asp-for="Name" class="form-control" placeholder="Insira o nome">
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">E-mail</label>
         <input type="email" asp-for="Email" class="form-control" placeholder="Insira o e-mail">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label for="email" class="form-label">Celular</label>
         <input type="text" asp-for="Phone" class="form-control" placeholder="Insira o celular">
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-outline-primary">Alterar</button>

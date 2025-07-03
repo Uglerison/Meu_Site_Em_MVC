@@ -38,23 +38,65 @@ namespace Meu_Site_Em_MVC.Controllers
 
         public IActionResult Erase(int id)
         {
-            _ContactRepository.Erase(id);
-            return RedirectToAction("Index");
+            try
+            {
+                _ContactRepository.Erase(id);
+                TempData["msgSuccess"] = "Cadastro excluído com sucesso!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception error)
+            {
+
+                TempData["msgError"] = $"Não foi possível excluir o cadastro: {error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
 
         [HttpPost]
         public IActionResult Criar(ContactModel contact)
         {
-            _ContactRepository.Adicionar(contact);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _ContactRepository.Adicionar(contact);
+                    TempData["msgSuccess"] = "Cadastro criado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View(contact);
+
+            }
+            catch (Exception error)
+            {
+
+                TempData["msgError"] = $"Não foi possível realizar o cadastro: {error.Message}";
+                return RedirectToAction("Index");
+
+            }
+            
         }
 
         [HttpPost]
         public IActionResult Edit(ContactModel contact)
         {
-            _ContactRepository.Atualizar(contact);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _ContactRepository.Atualizar(contact);
+                    TempData["msgSuccess"] = "Cadastro editado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View("Edit", contact);
+            }
+            catch (Exception error)
+            {
+
+                TempData["msgError"] = $"Não foi possível Editar o cadastro: {error.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
     }
