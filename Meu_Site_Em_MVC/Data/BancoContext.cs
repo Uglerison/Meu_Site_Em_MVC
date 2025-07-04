@@ -14,5 +14,6 @@ namespace Meu_Site_Em_MVC.Data
         }
 
         public DbSet<ContactModel> Contatos { get; set; }
+        public DbSet<UserModel> Usuarios { get; set; }
     }
 }
